@@ -1,9 +1,8 @@
 // ENA  ENB   IN1   IN2   IN3   IN4   Description
-// HIGH HIGH  HIGH  LOW   HIGH  LOW   Car is running forward
-// HIGH HIGH  LOW   HIGH  LOW   HIGH  Car is running back
-// HIGH HIGH  LOW   HIGH  HIGH  LOW   Car is running left
-// HIGH HIGH  HIGH  LOW   LOW   HIGH  Car is running right
-
+// HIGH HIGH  HIGH  LOW   LOW   HIGH  Car is running forward
+// HIGH HIGH  LOW   HIGH  HIGH  LOW   Car is running back
+// HIGH HIGH  LOW   HIGH  LOW   HIGH  Car is running left
+// HIGH HIGH  HIGH  LOW   HIGH  LOW   Car is running right
 // HIGH HIGH  LOW   LOW   LOW   LOW   Car is stoped
 // HIGH HIGH  HIGH  HIGH  HIGH  HIGH  Car is stoped
 // LOW  LOW   N/A   N/A   N/A   N/A   Car is stoped
@@ -11,8 +10,8 @@
 #include <Servo.h>
 Servo myservo;
 
-int Echo = A0;
-int Trig = A1;
+int Echo = A1;
+int Trig = A2;
 
 #define ENA 5
 #define ENB 6
@@ -24,42 +23,42 @@ int Trig = A1;
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
 void forward(){
-  analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
+  digitalWrite(ENA, carSpeed);
+  digitalWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
   Serial.println("Forward");
   }
 
 void back(){
-  analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  Serial.println("Back");  
-  }
-
-void left(){
-  analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
+  digitalWrite(ENA, carSpeed);
+  digitalWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
+  Serial.println("Back");  
+  }
+
+void left(){
+  digitalWrite(ENA, carSpeed);
+  digitalWrite(ENB, carSpeed);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
   Serial.println("Left");  
   }
 
 void right(){
-  analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
+  digitalWrite(ENA, carSpeed);
+  digitalWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
   Serial.println("Right");  
   }
 
@@ -78,7 +77,6 @@ int Distance_test(){
  float Fdistance = pulseIn(Echo, HIGH);
  Fdistance = Fdistance / 58;
  return (int)Fdistance;  
- Serial.println("test");
 }
 
 
@@ -101,7 +99,7 @@ void loop(){
  myservo.write(90);
  delay(500);
  middleDistance = Distance_test();
- if(middleDistance <= 20){
+ if(middleDistance <= 30){
    stop();
    delay(500);
    myservo.write(10);
@@ -126,7 +124,7 @@ void loop(){
      left();
      delay(360);
      }
-   else if ((rightDistance <= 20) || (leftDistance <= 20)) {
+   else if ((rightDistance <= 30) or (leftDistance <= 30)) {
      back();
      delay(180);
      }

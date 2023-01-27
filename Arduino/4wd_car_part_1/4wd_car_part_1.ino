@@ -15,8 +15,8 @@ int Trig = A2;
 
 #define ENA 5
 #define ENB 6
-#define IN1 11
-#define IN2 12
+#define IN1 12
+#define IN2 13
 #define IN3 4
 #define IN4 7
 #define carSpeed 100

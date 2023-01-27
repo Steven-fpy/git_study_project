@@ -1,9 +1,8 @@
 // ENA  ENB   IN1   IN2   IN3   IN4   Description
-// HIGH HIGH  HIGH  LOW   HIGH  LOW   Car is running forward
-// HIGH HIGH  LOW   HIGH  LOW   HIGH  Car is running back
-// HIGH HIGH  LOW   HIGH  HIGH  LOW   Car is running left
-// HIGH HIGH  HIGH  LOW   LOW   HIGH  Car is running right
-
+// HIGH HIGH  HIGH  LOW   LOW   HIGH  Car is running forward
+// HIGH HIGH  LOW   HIGH  HIGH  LOW   Car is running back
+// HIGH HIGH  LOW   HIGH  LOW   HIGH  Car is running left
+// HIGH HIGH  HIGH  LOW   HIGH  LOW   Car is running right
 // HIGH HIGH  LOW   LOW   LOW   LOW   Car is stoped
 // HIGH HIGH  HIGH  HIGH  HIGH  HIGH  Car is stoped
 // LOW  LOW   N/A   N/A   N/A   N/A   Car is stoped
@@ -11,8 +10,8 @@
 #include <Servo.h>
 Servo myservo;
 
-int Echo = A0;
-int Trig = A1;
+int Echo = A1;
+int Trig = A2;
 
 #define ENA 5
 #define ENB 6
@@ -28,8 +27,8 @@ void forward(){
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
   Serial.println("Forward");
   }
 
@@ -38,8 +37,8 @@ void back(){
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
   Serial.println("Back");  
   }
 
@@ -48,8 +47,8 @@ void left(){
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
   Serial.println("Left");  
   }
 
@@ -58,27 +57,26 @@ void right(){
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
   Serial.println("Right");  
   }
 
 void stop(){
- digitalWrite(ENA, LOW);
- digitalWrite(ENB, LOW);
+ analogWrite(ENA, LOW);
+ analogWrite(ENB, LOW);
  Serial.println("Stop!");  
 }
 
 int Distance_test(){
- digitalWrite(Trig, LOW);
+ analogWrite(Trig, LOW);
  delayMicroseconds(2);
- digitalWrite(Trig, HIGH);
+ analogWrite(Trig, HIGH);
  delayMicroseconds(20);
- digitalWrite(Trig, LOW);
+ analogWrite(Trig, LOW);
  float Fdistance = pulseIn(Echo, HIGH);
  Fdistance = Fdistance / 58;
  return (int)Fdistance;  
- Serial.println("test");
 }
 
 
