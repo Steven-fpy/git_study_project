@@ -10,14 +10,14 @@
 #include <Servo.h>
 Servo myservo;
 
-int Echo = 13;
-int Trig = 12;
+int Echo = A1;
+int Trig = A2;
 
 #define ENA 5
 #define ENB 6
-#define IN1 3
-#define IN2 4
-#define IN3 2
+#define IN1 11
+#define IN2 12
+#define IN3 4
 #define IN4 7
 #define carSpeed 100
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
@@ -82,7 +82,7 @@ void right(){
 
 
 void setup(){
-  myservo.attach(A0);
+  myservo.attach(3);
   Serial.begin(9600);
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
