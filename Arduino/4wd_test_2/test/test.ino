@@ -20,7 +20,6 @@ int Trig = A2;
 #define IN2 13
 #define IN3 4
 #define IN4 7
-#define IN5 8
 #define carSpeed 150
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
@@ -92,10 +91,8 @@ void setup(){
   pinMode(IN2,OUTPUT);
   pinMode(IN3,OUTPUT);
   pinMode(IN4,OUTPUT);
-  pinMode(IN5,OUTPUT);
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
-  pinMode(ENC,OUTPUT);
   stop();
 }
 
