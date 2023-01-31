@@ -30,7 +30,7 @@ void forward(){
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  Serial.println("Forward");
+  Serial.println("Forward", "high:", HIGH, "low:",LOW);
   }
 
 void back(){
@@ -38,9 +38,11 @@ void back(){
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
+  digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
+  digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
-  Serial.println("Back");  
+  Serial.println("Back", "high:", HIGH, "low:",LOW);
   }
 
 void left(){
@@ -88,11 +90,15 @@ void setup(){
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
   pinMode(IN1,OUTPUT);
+  Serial.println("SETUP", "Echo:", Echo, "INPUT:", INPUT);
   pinMode(IN2,OUTPUT);
   pinMode(IN3,OUTPUT);
   pinMode(IN4,OUTPUT);
+  Serial.println("SETUP", "Echo:", Echo, "INPUT:", INPUT);
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
+  pinMode(ENC,OUTPUT);
+  Serial.println("SETUP", "Trig:", Trig, "OUTPUT:", OUTPUT);
   stop();
 }
 
