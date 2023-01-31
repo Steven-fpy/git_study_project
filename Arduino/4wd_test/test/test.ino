@@ -22,6 +22,17 @@ int Trig = A2;
 #define carSpeed 150
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
+void fineAdjustmentAngle_2(){
+  int angle = 0;
+  if angle >= 90{
+    angle = angle + 0.5;
+    Serial.println("ANGLE = ", angle);
+    }
+  else{
+    break;
+  }
+}
+
 void forward(){
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
@@ -30,7 +41,16 @@ void forward(){
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   Serial.println("Forward");
-  }
+}
+void booster(){
+  analogWrite(ENA, 500);
+  analogWrite(ENB, 500);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
 
 void back(){
   analogWrite(ENA, carSpeed);
