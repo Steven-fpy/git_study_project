@@ -54,7 +54,7 @@ void booster(){
 
 void back(){
   analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
+  analogWrite(ENB, 160);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
@@ -64,7 +64,7 @@ void back(){
 
 void left(){
   analogWrite(ENA, carSpeed);
-  analogWrite(ENB, carSpeed);
+  analogWrite(ENB, 160);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
@@ -102,7 +102,7 @@ int Distance_test(){
 
 
 void setup(){
-  myservo.attach(3);
+  myservo.attach(3,4);
   Serial.begin(9600);
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
