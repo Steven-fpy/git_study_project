@@ -33,18 +33,6 @@ void forward(){
   Serial.println("Forward", "high:", HIGH, "low:",LOW);
   }
 
-void back(){
-  analogWrite(ENA, carSpeed);
-  analogWrite(ENB, 150);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-  Serial.println("Back", "high:", HIGH, "low:",LOW);
-  }
-
 void left(){
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
