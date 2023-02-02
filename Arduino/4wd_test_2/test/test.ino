@@ -33,6 +33,14 @@ void forward(){
   Serial.println("Forward", "high:", HIGH, "low:",LOW);
   }
 
+void booster(){
+  analogWrite(ENB, 600);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN2, LOW);
+}
+
 void left(){
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
