@@ -1,6 +1,6 @@
 #include <Servo.h>
 Servo myservo;
-
+const int LED = 10;
 int Echo = A1;
 int Trig = A2;
 
@@ -28,7 +28,8 @@ int Distance_test(){
   return (int)Fdistance;
 }
 
-void setup(){
+void setup() {
+  pinMode(LED, OUTPUT);
   myservo.attach(3);
   Serial.begin(9600);
   pinMode(Echo, INPUT);
@@ -40,4 +41,11 @@ void setup(){
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
   light();
+}
+
+void loop() {    // 1초 간격으로 LED가 깜빡임 
+  digitalWrite(LED, HIGH);
+  delay(1000);
+  digitalWrite(LED, LOW);
+  delay(1000);
 }
