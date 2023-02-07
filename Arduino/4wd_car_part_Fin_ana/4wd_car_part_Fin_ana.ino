@@ -22,7 +22,7 @@ int Trig = A2;
 #define carSpeed 150
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
-void forward(){
+void forward() {
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
@@ -30,109 +30,109 @@ void forward(){
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   Serial.println("Forward");
-  }
+}
 
-void back(){
+void back() {
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  Serial.println("Back");  
-  }
+  Serial.println("Back");
+}
 
-void left(){
+void left() {
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  Serial.println("Left");  
-  }
+  Serial.println("Left");
+}
 
-void right(){
+void right() {
   analogWrite(ENA, carSpeed);
   analogWrite(ENB, carSpeed);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  Serial.println("Right");  
-  }
-
-void stop(){
- analogWrite(ENA, LOW);
- analogWrite(ENB, LOW);
- Serial.println("Stop!");  
+  Serial.println("Right");
 }
 
-int Distance_test(){
- analogWrite(Trig, LOW);
- delayMicroseconds(2);
- analogWrite(Trig, HIGH);
- delayMicroseconds(20);
- analogWrite(Trig, LOW);
- float Fdistance = pulseIn(Echo, HIGH);
- Fdistance = Fdistance / 58;
- return (int)Fdistance;  
+void stop() {
+  analogWrite(ENA, LOW);
+  analogWrite(ENB, LOW);
+  Serial.println("Stop!");
+}
+
+int Distance_test() {
+  analogWrite(Trig, LOW);
+  delayMicroseconds(2);
+  analogWrite(Trig, HIGH);
+  delayMicroseconds(20);
+  analogWrite(Trig, LOW);
+  float Fdistance = pulseIn(Echo, HIGH);
+  Fdistance = Fdistance / 58;
+  return (int) Fdistance;
 }
 
 
-void setup(){
+void setup() {
   myservo.attach(3);
   Serial.begin(9600);
   pinMode(Echo, INPUT);
   pinMode(Trig, OUTPUT);
-  pinMode(IN1,OUTPUT);
-  pinMode(IN2,OUTPUT);
-  pinMode(IN3,OUTPUT);
-  pinMode(IN4,OUTPUT);
-  pinMode(ENA,OUTPUT);
-  pinMode(ENB,OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
   stop();
 }
 
-void loop(){
-  
- myservo.write(90);
- delay(500);
- middleDistance = Distance_test();
- if(middleDistance <= 20){
-   stop();
-   delay(500);
-   myservo.write(10);
-   delay(1000);
-   rightDistance = Distance_test();
-   
-   delay(500);
-   myservo.write(90);
-   delay(1000);
-   myservo.write(180);
-   delay(1000);
-   leftDistance = Distance_test();
+void loop() {
+  myservo.write(90);
+  delay(500);
+  middleDistance = Distance_test();
+  if (middleDistance <= 20) {
+    stop();
+    delay(500);
+    myservo.write(10);
+    delay(1000);
+    rightDistance = Distance_test();
 
-   delay(500);
-   myservo.write(90);
-   delay(1000);
-   if(rightDistance > leftDistance) {
-     right();
-     delay(360);
-   }
-   else if (rightDistance < leftDistance){
-     left();
-     delay(360);
-     }
-   else if ((rightDistance <= 20) || (leftDistance <= 20)) {
-     back();
-     delay(180);
-     }
-   else {
-     forward();
-   }
- }
- else{
-    forward(); 
+    delay(500);
+    myservo.write(90);
+    delay(1000);
+    myservo.write(180);
+    delay(1000);
+    leftDistance = Distance_test();
+
+    delay(500);
+    myservo.write(90);
+    delay(1000);
+
+    if (rightDistance > leftDistance) {
+      right();
+      delay(60);
+
+    } else if (rightDistance < leftDistance) {
+      left();
+      delay(160);
+
+    } else if ((rightDistance <= 20) || (leftDistance <= 20)) {
+      back();
+      delay(80);
+
+    } else {
+      forward();
+    }
+
+  } else {
+    forward();
   }
 }
