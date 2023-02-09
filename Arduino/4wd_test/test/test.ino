@@ -17,12 +17,8 @@ int Trig = A2;
 #define ENB 6
 #define IN1 12
 #define IN2 13
-#define IN3 7
+#define IN3 4
 #define IN4 7
-#define IN5 13
-#define IN6 4
-#define IN7 4
-#define carSpeed 150
 #define carSpeed 150
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
